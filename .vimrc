@@ -86,8 +86,8 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 :map <F2> :NERDTreeToggle<CR>
 
 " テンプレートファイル
-autocmd BufNewFile *.html 0r ~/.vim/templates/skel.html
-autocmd BufNewFile *.css 0r ~/.vim/templates/skel.css
+autocmd BufNewFile *.html 0r ~/.vim/skel/skel.html
+autocmd BufNewFile *.css 0r ~/.vim/skel/skel.css
 
 " Less
 au! BufRead,BufNewFile *.less set filetype=less
