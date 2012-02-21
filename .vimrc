@@ -47,6 +47,14 @@ highlight CursorLine ctermbg=black guibg=Gray30
 " <ESC>2回でハイライトを消す
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
+" 括弧入力時に括弧内に戻る
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
+
 " neocomplcache設定
 let g:neocomplcache_enable_at_startup = 1
 function InsertTabWrapper()
@@ -155,3 +163,6 @@ Bundle 'tell-k/vim-browsereload-mac'
 
 " Endtagcomment.vim
 Bundle 'git://gist.github.com/411828.git'
+
+" mru.vim
+Bundle 'vim-scripts/mru.vim'
