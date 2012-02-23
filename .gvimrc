@@ -20,3 +20,5 @@ set wildmenu
 set nobackup
 set noswapfile
 colorscheme desert " カラースキーマを指定
+"colorscheme railscasts " カラースキーマを指定
+"colorscheme molokai " カラースキーマを指定

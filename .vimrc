@@ -1,11 +1,9 @@
 " GUI_MacVim設定
 if has('gui_macvim')
-    set transparency=10 " 透明度を指定
     set guifont=Consolas:h16 " フォント指定
     set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
     set guioptions-=T " ウィンドウ上部のタブ部分を無効に
     set imdisable " IMEを無効に
-    set guioptions-=T
     "set tabstop=2
     "set shiftwidth=2
     set showtabline=2
@@ -55,6 +53,13 @@ imap "" ""<Left>
 imap '' ''<Left>
 imap <> <><Left>
 
+" CTRL+TAB でタブ切替
+noremap <C-Tab> gt
+noremap <C-S-Tab> gT
+
+nnoremap <Space> jzz
+nnoremap <S-Space> kzz
+
 " neocomplcache設定
 let g:neocomplcache_enable_at_startup = 1
 function InsertTabWrapper()
@@ -81,6 +86,10 @@ nmap <c-o>m <Plug>NERDCommenterMinimal
 vmap <c-o>m <Plug>NERDCommenterMinimal
 nmap <c-o>s <Plug>NERDCommenterSexy
 vmap <c-o>s <Plug>NERDCommenterSexy
+
+" endtagcomment.vim
+let g:endtagcommentFormat = '<!-- /%id%class -->'
+nnoremap ,t :<C-u>call Endtagcomment()<CR>
 
 " <C-k> にマッピング
 imap <C-k> <Plug>(neocomplcache_snippets_expand)
@@ -112,7 +121,10 @@ let g:qb_hotkey = ";;"
 " Pathogen
 " call pathogen#runtime_append_all_bundles()
 
+
 " vundle
+" -----------------------------------------------------
+
 set nocompatible
 filetype off
 
@@ -165,4 +177,10 @@ Bundle 'tell-k/vim-browsereload-mac'
 Bundle 'git://gist.github.com/411828.git'
 
 " mru.vim
-Bundle 'vim-scripts/mru.vim'
+" Bundle 'vim-scripts/mru.vim'
+
+" FuzzyFinder
+" Bundle 'FuzzyFinder'
+
+" Auto Close
+Bundle "AutoClose"
