@@ -24,11 +24,17 @@ set encoding=utf-8
 " \を¥に置き換え
 let mapleader='¥'
 
+" コマンド、検索パターンを100個まで履歴に残す
+set history=100
+
 " 検索時、「/」の入力をエスケープ
 " cnoremap  / getcmdtype() == '/' ? '\/' : '/'
 "
 " ブラウザでファイルを開く
 :map <silent> <F5> :!open %<CR>
+
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
 
 " カーソル行をハイライト
 set cursorline
@@ -65,6 +71,10 @@ noremap <C-S-Tab> gT
 
 nnoremap <Space> jzz
 nnoremap <S-Space> kzz
+
+
+" Plugin 設定
+" -----------------------------------------------------
 
 " neocomplcache設定
 let g:neocomplcache_enable_at_startup = 1
@@ -117,9 +127,6 @@ au! BufRead,BufNewFile *.less set filetype=less
 
 " velocity
 au BufRead,BufNewFile *.vm set ft=html syntax=velocity
-
-" 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
 
 " QuickBuf
 let g:qb_hotkey = ";;"
@@ -193,7 +200,4 @@ Bundle 'git://gist.github.com/411828.git'
 
 " MatchTag
 Bundle "MatchTag"
-
-" Rainbow-Parenthesis
-Bundle "Rainbow-Parenthesis"
 
