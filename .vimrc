@@ -53,6 +53,12 @@ imap "" ""<Left>
 imap '' ''<Left>
 imap <> <><Left>
 
+" ウィンドウ移動
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
 " CTRL+TAB でタブ切替
 noremap <C-Tab> gt
 noremap <C-S-Tab> gT
@@ -183,4 +189,11 @@ Bundle 'git://gist.github.com/411828.git'
 " Bundle 'FuzzyFinder'
 
 " Auto Close
-Bundle "AutoClose"
+" Bundle 'AutoClose'
+
+" MatchTag
+Bundle "MatchTag"
+
+" Rainbow-Parenthesis
+Bundle "Rainbow-Parenthesis"
+
