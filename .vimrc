@@ -201,3 +201,6 @@ Bundle 'git://gist.github.com/411828.git'
 " MatchTag
 Bundle "MatchTag"
 
+" Syntastic
+Bundle 'scrooloose/syntastic'
+

@@ -22,3 +22,4 @@ set noswapfile
 colorscheme desert " カラースキーマを指定
 "colorscheme railscasts " カラースキーマを指定
 "colorscheme molokai " カラースキーマを指定
+"colorscheme wombat " カラースキーマを指定
