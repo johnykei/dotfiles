@@ -4,12 +4,12 @@ if has('gui_macvim')
     set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
     set guioptions-=T " ウィンドウ上部のタブ部分を無効に
     set imdisable " IMEを無効に
-    "set tabstop=2
-    "set shiftwidth=2
     set showtabline=2
-    set tabstop=4
-    set expandtab
-    set shiftwidth=4
+		set expandtab
+    set tabstop=2
+    set shiftwidth=2
+    "set tabstop=4
+    "set shiftwidth=4
     set smartindent
     set showmatch
     set number
@@ -20,6 +20,7 @@ endif
 
 " encoding
 set encoding=utf-8
+set fileencoding=utf-8
 
 " \を¥に置き換え
 let mapleader='¥'
@@ -49,7 +50,7 @@ hi clear CursorLine
 highlight CursorLine ctermbg=black guibg=Gray30
 
 " <ESC>2回でハイライトを消す
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
 " 括弧入力時に括弧内に戻る
 imap {} {}<Left>
@@ -132,8 +133,58 @@ au BufRead,BufNewFile *.vm set ft=html syntax=velocity
 let g:qb_hotkey = ";;"
 
 " Pathogen
-" call pathogen#runtime_append_all_bundles()
+" call pathogen#runtim➜e_append_all_bundles()
 
+" CtrlP
+"let g:ctrlp_working_path_mode = 2
+
+" vimshell
+let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
+let g:vimshell_editor_command = '/Applications/MacVim.app/Contents/MacOS/Vim'
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = ''
+let g:vimshell_max_command_history = 3000
+let g:vimshell_enable_smart_case = 1
+let g:vimshell_prompt = $USER."% "
+
+nnoremap <silent> vs :VimShell<CR>
+nnoremap <silent> vsc :VimShellCreate<CR>
+nnoremap <silent> vp :VimShellPop<CR>
+
+" unite.vim
+" 入力モードで開始する
+let g:unite_enable_start_insert=1
+let g:unite_split_rule="botright"
+" バッファ一覧
+nnoremap <silent> ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ur :<C-u>Unite -buffer-name=register register<CR>
+" ブックマーク一覧
+nnoremap <silent> uc :<C-u>Unite bookmark<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> um :<C-u>Unite file_mru<CR>
+" 常用セット
+nnoremap <silent> uu :<C-u>Unite buffer file_mru<CR>
+" 全部乗せ
+nnoremap <silent> ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+" vim-indent-guide
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkGrey   ctermbg=darkgrey
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey50 ctermbg=12
+" let g:indent_guides_enable_on_vim_startup = 1
 
 " vundle
 " -----------------------------------------------------
@@ -204,3 +255,17 @@ Bundle "MatchTag"
 " Syntastic
 Bundle 'scrooloose/syntastic'
 
+" ctrip
+"Bundle 'kien/ctrlp.vim'
+
+" vimproc
+Bundle 'Shougo/vimproc'
+
+" vimshell
+Bundle 'Shougo/vimshell'
+
+" unite.vim
+Bundle 'Shougo/unite.vim'
+
+" vim-indent-guides
+"Bundle 'nathanaelkane/vim-indent-guides'
