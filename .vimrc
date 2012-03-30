@@ -5,14 +5,16 @@ if has('gui_macvim')
     set guioptions-=T " ウィンドウ上部のタブ部分を無効に
     set imdisable " IMEを無効に
     set showtabline=2
-		set expandtab
-    set tabstop=2
-    set shiftwidth=2
-    "set tabstop=4
-    "set shiftwidth=4
+    set expandtab
+    "set tabstop=2
+    "set shiftwidth=2
+    set tabstop=4
+    set shiftwidth=4
     set smartindent
     set showmatch
     set number
+    set noerrorbells " ビープ音を消す
+    set vb t_vb=  " ビープ音を消す
     "フルスクリーンモード
 	"set fuoptions=maxvert,maxhorz
   	"autocmd GUIEnter * set fullscreen
@@ -186,6 +188,14 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey50 ctermbg=12
 " let g:indent_guides_enable_on_vim_startup = 1
 
+" memolist.vim
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_path = "~/Documents/memo"
+
+let g:quickrun_config={}
+
 " vundle
 " -----------------------------------------------------
 
@@ -269,3 +279,7 @@ Bundle 'Shougo/unite.vim'
 
 " vim-indent-guides
 "Bundle 'nathanaelkane/vim-indent-guides'
+
+" memolist
+Bundle 'glidenote/memolist.vim'
+

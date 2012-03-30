@@ -7,12 +7,12 @@ set imdisable " IMEを無効に
 set guioptions-=T
 set showtabline=2
 set expandtab
-set tabstop=2
-set shiftwidth=2
-"set tabstop=4
-"set shiftwidth=4
+"set tabstop=2
+"set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set smartindent
-set autoindent
+"set autoindent
 set showmatch
 set number
 set incsearch
