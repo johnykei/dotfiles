@@ -283,3 +283,5 @@ Bundle 'Shougo/unite.vim'
 " memolist
 Bundle 'glidenote/memolist.vim'
 
+"Changed
+Bundle 'Changed'

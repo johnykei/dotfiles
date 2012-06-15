@@ -56,4 +56,19 @@ SAVEHIST=10000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 
+## Autojump
+#alias j="autojump"
+# if [ -x /usr/local/bin/brew ]; then
+    # BREW_PREFIX=`brew --prefix`
+    # fpath=($BREW_PREFIX/share/zsh/functions(N) $BREW_PREFIX/share/zsh/site-functions(N) $fpath)
+# fi
+# autoload -U compinit; compinit -u
+
+# z.sh
+_Z_CMD=j
+source ~/.zsh/z/z.sh
+precmd() {
+  _z --add "$(pwd -P)"
+}
+
 source ~/perl5/perlbrew/etc/bashrc
