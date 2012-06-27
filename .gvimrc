@@ -23,3 +23,16 @@ colorscheme desert " カラースキーマを指定
 "colorscheme railscasts " カラースキーマを指定
 "colorscheme molokai " カラースキーマを指定
 "colorscheme wombat " カラースキーマを指定
+
+" vimshell
+let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
+let g:vimshell_editor_command = '/Applications/MacVim.app/Contents/MacOS/Vim'
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = ''
+let g:vimshell_max_command_history = 3000
+let g:vimshell_enable_smart_case = 1
+let g:vimshell_prompt = $USER."% "
+
+nnoremap <silent> vs :VimShell<CR>
+nnoremap <silent> vsc :VimShellCreate<CR>
+nnoremap <silent> vp :VimShellPop<CR>

@@ -140,19 +140,6 @@ let g:qb_hotkey = ";;"
 " CtrlP
 "let g:ctrlp_working_path_mode = 2
 
-" vimshell
-let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
-let g:vimshell_editor_command = '/Applications/MacVim.app/Contents/MacOS/Vim'
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_right_prompt = ''
-let g:vimshell_max_command_history = 3000
-let g:vimshell_enable_smart_case = 1
-let g:vimshell_prompt = $USER."% "
-
-nnoremap <silent> vs :VimShell<CR>
-nnoremap <silent> vsc :VimShellCreate<CR>
-nnoremap <silent> vp :VimShellPop<CR>
-
 " unite.vim
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
@@ -285,3 +272,6 @@ Bundle 'glidenote/memolist.vim'
 
 "Changed
 Bundle 'Changed'
+
+" git-vim
+Bundle 'motemen/git-vim'
