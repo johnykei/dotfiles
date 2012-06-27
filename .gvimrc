@@ -36,3 +36,4 @@ let g:vimshell_prompt = $USER."% "
 nnoremap <silent> vs :VimShell<CR>
 nnoremap <silent> vsc :VimShellCreate<CR>
 nnoremap <silent> vp :VimShellPop<CR>
+

@@ -169,12 +169,6 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
-" vim-indent-guide
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkGrey   ctermbg=darkgrey
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey50 ctermbg=12
-" let g:indent_guides_enable_on_vim_startup = 1
-
 " memolist.vim
 map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
@@ -263,9 +257,6 @@ Bundle 'Shougo/vimshell'
 
 " unite.vim
 Bundle 'Shougo/unite.vim'
-
-" vim-indent-guides
-"Bundle 'nathanaelkane/vim-indent-guides'
 
 " memolist
 Bundle 'glidenote/memolist.vim'
