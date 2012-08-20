@@ -56,6 +56,15 @@ SAVEHIST=10000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 
+alias gco="git checkout"
+alias gst="git status"
+alias gci="git commit -a"
+alias gdi="git diff"
+alias gbr="git branch"
+alias gbr="git branch"
+alias gad="git add ."
+alias ghe="git help"
+
 ## Autojump
 #alias j="autojump"
 # if [ -x /usr/local/bin/brew ]; then
@@ -72,3 +81,7 @@ precmd() {
 }
 
 source ~/perl5/perlbrew/etc/bashrc
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+[[ -s "/Users/okafujikeisuke/.rvm/scripts/rvm" ]] && source "/Users/okafujikeisuke/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

@@ -1,24 +1,22 @@
-" GUI_MacVim設定
-if has('gui_macvim')
-    set guifont=Consolas:h16 " フォント指定
-    set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
-    set guioptions-=T " ウィンドウ上部のタブ部分を無効に
-    set imdisable " IMEを無効に
-    set showtabline=2
-    set expandtab
-    "set tabstop=2
-    "set shiftwidth=2
-    set tabstop=4
-    set shiftwidth=4
-    set smartindent
-    set showmatch
-    set number
-    set noerrorbells " ビープ音を消す
-    set vb t_vb=  " ビープ音を消す
-    "フルスクリーンモード
-	"set fuoptions=maxvert,maxhorz
-  	"autocmd GUIEnter * set fullscreen
-endif
+" 基本設定
+set guifont=Consolas:h16 " フォント指定
+set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
+set guioptions-=T " ウィンドウ上部のタブ部分を無効に
+set imdisable " IMEを無効に
+set showtabline=2
+set expandtab
+"set tabstop=2
+"set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
+set smartindent
+set showmatch
+set number
+set noerrorbells " ビープ音を消す
+set vb t_vb=  " ビープ音を消す
+"フルスクリーンモード
+"set fuoptions=maxvert,maxhorz
+"autocmd GUIEnter * set fullscreen
 
 " encoding
 set encoding=utf-8
@@ -266,3 +264,10 @@ Bundle 'Changed'
 
 " git-vim
 Bundle 'motemen/git-vim'
+
+" Sass
+"Bundle 'tpope/vim-haml'
+Bundle 'cakebaker/scss-syntax.vim'
+
+" Sass Compile
+"Bundle 'AtsushiM/sass-compile.vim'
