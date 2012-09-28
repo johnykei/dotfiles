@@ -1,5 +1,5 @@
 " 基本設定
-set guifont=Consolas:h16 " フォント指定
+set guifont=Source_Code_Pro:h16 " フォント指定
 set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
 set guioptions-=T " ウィンドウ上部のタブ部分を無効に
 set imdisable " IMEを無効に
@@ -73,6 +73,18 @@ noremap <C-S-Tab> gT
 nnoremap <Space> jzz
 nnoremap <S-Space> kzz
 
+" Load settings for each location.
+augroup vimrc-local
+  autocmd!
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
+endfunction
 
 " Plugin 設定
 " -----------------------------------------------------
@@ -175,6 +187,11 @@ let g:memolist_path = "~/Documents/memo"
 
 let g:quickrun_config={}
 
+" syntastic
+let g:syntastic_mode_map = { 'mode': 'active',
+  \ 'active_filetypes': [],
+  \ 'passive_filetypes': ['scss'] }
+
 " vundle
 " -----------------------------------------------------
 
@@ -260,7 +277,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'glidenote/memolist.vim'
 
 "Changed
-Bundle 'Changed'
+"Bundle 'Changed'
 
 " git-vim
 Bundle 'motemen/git-vim'
