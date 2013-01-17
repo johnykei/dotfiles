@@ -3,7 +3,8 @@ set transparency=10 " 透明度を指定
 set guifont=Source_Code_Pro:h16 " フォント指定
 set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
 set guioptions-=T " ウィンドウ上部のタブ部分を無効に
-set imdisable " IMEを無効に
+set noimdisableactivate
+"set imdisable " IMEを無効に
 set guioptions-=T
 set showtabline=2
 set expandtab
@@ -25,6 +26,7 @@ colorscheme desert " カラースキーマを指定
 "colorscheme wombat " カラースキーマを指定
 "colorscheme github " カラースキーマを指定
 "colorscheme guardian " カラースキーマを指定
+"colorscheme solarized " カラースキーマを指定
 
 " vimshell
 let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'

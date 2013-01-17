@@ -2,7 +2,8 @@
 set guifont=Source_Code_Pro:h16 " フォント指定
 set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
 set guioptions-=T " ウィンドウ上部のタブ部分を無効に
-set imdisable " IMEを無効に
+"set noimdisableactivate
+"set imdisable " IMEを無効に
 set showtabline=2
 set expandtab
 "set tabstop=2
@@ -192,6 +193,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': [],
   \ 'passive_filetypes': ['scss'] }
 
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+
 " vundle
 " -----------------------------------------------------
 
@@ -204,8 +208,11 @@ call vundle#rc()
 " neocomplcache.vim
 Bundle 'Shougo/neocomplcache'
 
-" neocomplcache-snippets-complete.vim
-Bundle 'Shougo/neocomplcache-snippets-complete'
+" neosnippet.vim
+Bundle 'Shougo/neosnippet'
+
+" snipmate-snippets
+Bundle 'honza/snipmate-snippets'
 
 " Nerdcommenter
 Bundle 'scrooloose/nerdcommenter'
