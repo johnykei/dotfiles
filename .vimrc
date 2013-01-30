@@ -107,6 +107,8 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
+let g:neosnippet#snippets_directory='~/dotfiles/.vim/bundle/snipmate-snippets/snippets','~/dotfiles/.vim/snippets'
+
 " for NERDCommenterToggle c-oでコメントアウト・コメント
 let g:NERDCreateDefaultMappings = 0
 let NERDSpaceDelims = 1

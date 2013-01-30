@@ -1,0 +1,51 @@
+snippet	box-shadow
+alias	bsh
+    @include box-shadow(${1});
+snippet	border-radius
+alias	bra
+    @include border-radius(${1});
+snippet	background-image-gradient
+alias	bglg
+    @include background-image(linear-gradient(top, ${1}, ${2} 100%));
+snippet	text-shadow
+alias	tsh
+    @include text-shadow(${1});
+snippet	hide-txt
+alias	hide
+    @include hide-txt;${1}
+snippet	clearfix
+alias	cf
+    @include clearfix;${1}
+snippet	hyphenation
+alias	hyphen
+    @include hyphenation;${1}
+snippet	image-width
+alias	iw
+    image-width('${1}')${2}
+snippet	image-height
+alias	ih
+    image-height('${1}')${2}
+snippet	image-url
+alias	iu
+    image-url('${1}')${2}
+snippet	hover
+alias	ho&
+    &:hover {${1}}
+snippet	before
+alias	be&
+    &:before {${1}}
+snippet	after
+alias	af&
+    &:after {${1}}
+snippet	first-child
+alias	fc&
+    &:first-child {${1}}
+snippet	last-child
+alias	lc&
+    &:last-child {${1}}
+snippet	nth-child
+alias	nc&
+    &:nth-child(${1}) {${2}}
+snippet	comment-b
+alias	cmb
+    // ===================================================
