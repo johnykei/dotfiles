@@ -107,7 +107,8 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-let g:neosnippet#snippets_directory='~/dotfiles/.vim/bundle/snipmate-snippets/snippets','~/dotfiles/.vim/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 " for NERDCommenterToggle c-oでコメントアウト・コメント
 let g:NERDCreateDefaultMappings = 0
@@ -124,8 +125,8 @@ let g:endtagcommentFormat = '<!-- /%id%class -->'
 nnoremap ,t :<C-u>call Endtagcomment()<CR>
 
 " <C-k> にマッピング
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 " Zen-coding を<C-z> にマッピング
 :imap <C-z> <C-y>
@@ -187,16 +188,34 @@ map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
 map <Leader>mg  :MemoGrep<CR>
 let g:memolist_path = "~/Documents/memo"
+let g:memolist_memo_suffix = "md"
 
 let g:quickrun_config={}
 
 " syntastic
 let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['scss'] }
+  \ 'active_filetypes': ['css', 'javascript'],
+  \ 'passive_filetypes': ['html', 'scss'] }
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+" let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+
+" open Kobito app
+function! s:open_kobito(...)
+    if a:0 == 0
+        call system('open -a Kobito '.expand('%:p'))
+    else
+        call system('open -a Kobito '.join(a:000, ' '))
+    endif
+endfunction
+
+" 引数のファイル(複数指定可)を Kobitoで開く
+" （引数無しのときはカレントバッファを開く
+command! -nargs=* Kobito call s:open_kobito(<f-args>)
+" Kobito を閉じる
+command! -nargs=0 KobitoClose call system("osascript -e 'tell application \"Kobito\" to quit'")
+" Kobito にフォーカスを移す
+command! -nargs=0 KobitoFocus call system("osascript -e 'tell application \"Kobito\" to activate'")
 
 " vundle
 " -----------------------------------------------------
@@ -232,7 +251,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'chrismetcalf/vim-yankring'
 
 " Zencoding
-Bundle 'mattn/zencoding-vim'
+" Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 
 " ack.vim
 Bundle 'mileszs/ack.vim'
@@ -297,3 +317,6 @@ Bundle 'cakebaker/scss-syntax.vim'
 
 " Sass Compile
 "Bundle 'AtsushiM/sass-compile.vim'
+
+" CSScomb
+Bundle 'csscomb/CSScomb-for-Vim'

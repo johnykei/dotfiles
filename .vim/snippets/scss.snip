@@ -1,3 +1,9 @@
+snippet	min-height
+alias	mhe
+    @include min-height(${1});
+snippet	min-width
+alias	mwi
+    @include min-width(${1});
 snippet	box-shadow
 alias	bsh
     @include box-shadow(${1});
@@ -7,15 +13,36 @@ alias	bra
 snippet	background-image-gradient
 alias	bglg
     @include background-image(linear-gradient(top, ${1}, ${2} 100%));
+snippet	three-background-image-gradient
+alias	tbglg
+    @include background-image(linear-gradient(top, ${1}, ${2} ${3}%, ${4} 100%));
+snippet	four-background-image-gradient
+alias	fbglg
+    @include background-image(linear-gradient(top, ${1}, ${2} ${3}%, ${4} ${5}%, ${6} 100%));
 snippet	text-shadow
 alias	tsh
     @include text-shadow(${1});
+snippet	opacity
+alias	opa
+    @include opacity(${1});
+snippet	box-sizing
+alias	bsz
+    @include box-sizing(${1});
+snippet	background-size
+alias	basz
+    @include background-size(${1});
+snippet	transition
+alias	tras
+    @include transition(${1});
 snippet	hide-txt
 alias	hide
     @include hide-txt;${1}
 snippet	clearfix
 alias	cf
     @include clearfix;${1}
+snippet	mediaquery
+alias	mq
+    @include mq(${1}){${2}}
 snippet	hyphenation
 alias	hyphen
     @include hyphenation;${1}

@@ -85,3 +85,5 @@ source ~/perl5/perlbrew/etc/bashrc
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s "/Users/okafujikeisuke/.rvm/scripts/rvm" ]] && source "/Users/okafujikeisuke/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export PATH=/usr/local/share/npm/bin:$PATH
