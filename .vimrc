@@ -1,4 +1,4 @@
-" 基本設定
+"" 基本設定 {{{
 set guifont=Source_Code_Pro:h16 " フォント指定
 set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
 set guioptions-=T " ウィンドウ上部のタブ部分を無効に
@@ -18,6 +18,8 @@ set vb t_vb=  " ビープ音を消す
 "フルスクリーンモード
 "set fuoptions=maxvert,maxhorz
 "autocmd GUIEnter * set fullscreen
+
+colorscheme hybrid " カラースキーマを指定
 
 " encoding
 set encoding=utf-8
@@ -87,10 +89,14 @@ function! s:vimrc_local(loc)
   endfor
 endfunction
 
-" Plugin 設定
+" テンプレートファイル
+autocmd BufNewFile *.html 0r ~/.vim/skel/skel.html
+autocmd BufNewFile *.css 0r ~/.vim/skel/skel.css
+
+"" Plugin 設定
 " -----------------------------------------------------
 
-" neocomplcache設定
+"" neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
 function InsertTabWrapper()
     if pumvisible()
@@ -110,7 +116,8 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
-" for NERDCommenterToggle c-oでコメントアウト・コメント
+"" for NERDCommenterToggle {{{
+" c-oでコメントアウト・コメント
 let g:NERDCreateDefaultMappings = 0
 let NERDSpaceDelims = 1
 nmap <c-o> <Plug>NERDCommenterToggle
@@ -120,58 +127,52 @@ vmap <c-o>m <Plug>NERDCommenterMinimal
 nmap <c-o>s <Plug>NERDCommenterSexy
 vmap <c-o>s <Plug>NERDCommenterSexy
 
-" endtagcomment.vim
+"" endtagcomment.vim {{{
 let g:endtagcommentFormat = '<!-- /%id%class -->'
 nnoremap ,t :<C-u>call Endtagcomment()<CR>
 
+"" neosnippet {{{
 " <C-k> にマッピング
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
-" Zen-coding を<C-z> にマッピング
+"" Zen-coding {{{
+" <C-z> にマッピング
 :imap <C-z> <C-y>
 :vmap <C-z> <C-y>
 
-" NERDTreeToggle を<F2>で開く
-:map <F2> :NERDTreeToggle<CR>
-
-" テンプレートファイル
-autocmd BufNewFile *.html 0r ~/.vim/skel/skel.html
-autocmd BufNewFile *.css 0r ~/.vim/skel/skel.css
-
-" Less
+"" Less {{{
 au! BufRead,BufNewFile *.less set filetype=less
 
-" velocity
+"" velocity {{{
 au BufRead,BufNewFile *.vm set ft=html syntax=velocity
 
-" QuickBuf
+""" QuickBuf {{{
 let g:qb_hotkey = ";;"
 
-" Pathogen
-" call pathogen#runtim➜e_append_all_bundles()
-
-" CtrlP
-"let g:ctrlp_working_path_mode = 2
-
-" unite.vim
+"" unite.vim {{{
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <Leader>f [unite]
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
 let g:unite_split_rule="botright"
 " バッファ一覧
-nnoremap <silent> ub :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
-nnoremap <silent> ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 " ブックマーク一覧
-nnoremap <silent> uc :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+" ブックマークに追加
+nnoremap <silent> [unite]d :<C-u>UniteBookmarkAdd<CR>
 " 最近使用したファイル一覧
-nnoremap <silent> um :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
 " 常用セット
-nnoremap <silent> uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
-nnoremap <silent> ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
@@ -183,7 +184,10 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
-" memolist.vim
+"" vimfiler {{{
+let g:vimfiler_as_default_explorer = 1
+
+"" memolist.vim {{{
 map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
 map <Leader>mg  :MemoGrep<CR>
@@ -192,15 +196,17 @@ let g:memolist_memo_suffix = "md"
 
 let g:quickrun_config={}
 
-" syntastic
+"" syntastic {{{
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': ['css', 'javascript'],
   \ 'passive_filetypes': ['html', 'scss'] }
 
+nnoremap <silent> <Leader>m :OverCommandLine<CR>%s/
+
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 
-" open Kobito app
+"" open Kobito app {{{
 function! s:open_kobito(...)
     if a:0 == 0
         call system('open -a Kobito '.expand('%:p'))
@@ -216,6 +222,27 @@ command! -nargs=* Kobito call s:open_kobito(<f-args>)
 command! -nargs=0 KobitoClose call system("osascript -e 'tell application \"Kobito\" to quit'")
 " Kobito にフォーカスを移す
 command! -nargs=0 KobitoFocus call system("osascript -e 'tell application \"Kobito\" to activate'")
+
+"" vim-eazymotion {{{
+let g:EasyMotion_leader_key = ';'
+
+let g:EasyMotion_keys='hklyuiopnm,qwertzxcvbasdgjf;'
+
+nmap s <Plug>(easymotion-s)
+vmap s <Plug>(easymotion-s)
+omap z <Plug>(easymotion-s)
+
+let g:EasyMotion_startofline = 0
+
+" smartcase
+let g:EasyMotion_smartcase = 1
+
+" Migemo
+let g:EasyMotion_use_migemo = 1
+
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_enable_smart_case = 1
 
 " vundle
 " -----------------------------------------------------
@@ -239,7 +266,7 @@ Bundle 'honza/snipmate-snippets'
 Bundle 'scrooloose/nerdcommenter'
 
 " Nerdtree
-Bundle 'scrooloose/nerdtree'
+" Bundle 'scrooloose/nerdtree'
 
 " QuickBuf
 Bundle 'QuickBuf'
@@ -302,6 +329,12 @@ Bundle 'Shougo/vimshell'
 " unite.vim
 Bundle 'Shougo/unite.vim'
 
+" neomru
+Bundle 'Shougo/neomru.vim'
+
+" neomru
+Bundle 'Shougo/vimfiler.vim'
+
 " memolist
 Bundle 'glidenote/memolist.vim'
 
@@ -320,3 +353,9 @@ Bundle 'cakebaker/scss-syntax.vim'
 
 " CSScomb
 Bundle 'csscomb/CSScomb-for-Vim'
+
+" vim over
+Bundle 'osyo-manga/vim-over'
+
+" easy motion
+Bundle 'Lokaltog/vim-easymotion'

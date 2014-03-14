@@ -87,3 +87,9 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "/Users/okafujikeisuke/.rvm/scripts/rvm" ]] && source "/Users/okafujikeisuke/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH=/usr/local/share/npm/bin:$PATH
+
+# WP-CLI Bash completions
+autoload bashcompinit
+bashcompinit
+source $HOME/.wp-cli/vendor/wp-cli/wp-cli/utils/wp-completion.bash
+

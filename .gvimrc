@@ -20,17 +20,20 @@ set incsearch
 set wildmenu
 set nobackup
 set noswapfile
-colorscheme desert " カラースキーマを指定
+"colorscheme desert " カラースキーマを指定
 "colorscheme railscasts " カラースキーマを指定
 "colorscheme molokai " カラースキーマを指定
+"colorscheme monokai " カラースキーマを指定
 "colorscheme wombat " カラースキーマを指定
 "colorscheme github " カラースキーマを指定
 "colorscheme guardian " カラースキーマを指定
 "colorscheme solarized " カラースキーマを指定
+"colorscheme codeschool " カラースキーマを指定
+"colorscheme zenburn " カラースキーマを指定
+"colorscheme mustang " カラースキーマを指定
+colorscheme hybrid " カラースキーマを指定
 
 " vimshell
-let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
-let g:vimshell_editor_command = '/Applications/MacVim.app/Contents/MacOS/Vim'
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = ''
 let g:vimshell_max_command_history = 3000
@@ -41,3 +44,7 @@ nnoremap <silent> vs :VimShell<CR>
 nnoremap <silent> vsc :VimShellCreate<CR>
 nnoremap <silent> vp :VimShellPop<CR>
 
+if has('multi_byte_ime') || has('xim')
+  highlight Cursor guibg=khaki guifg=slategrey
+  highlight CursorIM guifg=NONE guibg=DarkRed
+endif
