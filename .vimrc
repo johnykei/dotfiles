@@ -13,8 +13,11 @@ set shiftwidth=4
 set smartindent
 set showmatch
 set number
+set noundofile " undo ファイルを無効化
 set noerrorbells " ビープ音を消す
 set vb t_vb=  " ビープ音を消す
+
+au BufEnter * execute ":lcd " . expand("%:p:h")
 "フルスクリーンモード
 "set fuoptions=maxvert,maxhorz
 "autocmd GUIEnter * set fullscreen
@@ -113,7 +116,7 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+" let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 "" for NERDCommenterToggle {{{
@@ -153,10 +156,15 @@ let g:qb_hotkey = ";;"
 "" unite.vim {{{
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    <Leader>f [unite]
+nmap    ;f [unite]
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
 let g:unite_split_rule="botright"
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
 " バッファ一覧
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 " ファイル一覧
@@ -174,6 +182,22 @@ nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
+" grep検索
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+
+" カーソル位置の単語をgrep検索
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+" grep検索結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
@@ -186,6 +210,11 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 "" vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
+" 新しいタブでファイルを開く
+let g:vimfiler_edit_action = 'tabopen'
+nnoremap <silent> [unite]e :<C-u>VimFilerBufferDir -quit<CR>
+"現在開いているバッファをIDE風に開く
+nnoremap <silent> [unite]i :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
 
 "" memolist.vim {{{
 map <Leader>mn  :MemoNew<CR>
@@ -232,6 +261,9 @@ nmap s <Plug>(easymotion-s)
 vmap s <Plug>(easymotion-s)
 omap z <Plug>(easymotion-s)
 
+map ;j <Plug>(easymotion-j)
+map ;k <Plug>(easymotion-k)
+
 let g:EasyMotion_startofline = 0
 
 " smartcase
@@ -239,6 +271,10 @@ let g:EasyMotion_smartcase = 1
 
 " Migemo
 let g:EasyMotion_use_migemo = 1
+
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
 
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
@@ -260,7 +296,7 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
 
 " snipmate-snippets
-Bundle 'honza/snipmate-snippets'
+" Bundle 'honza/snipmate-snippets'
 
 " Nerdcommenter
 Bundle 'scrooloose/nerdcommenter'

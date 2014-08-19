@@ -8,31 +8,16 @@ alias	bglg
 
 snippet	border-radius
 alias	bra
-    -webkit-border-radius: ${1};
-    -moz-border-radius: $1;
-    -o-border-radius: $1;
-    -ms-border-radius: $1;
     border-radius: $1;
 snippet	box-shadow
 alias	bsh
-    -webkit-box-shadow: ${1:inset} ${2} ${3} ${4} ${5} rgba(${6}, ${7}, ${8}, ${9});
-    -moz-box-shadow: $1 $2 $3 $4 $5 rgba($6, $7, $8, $9);
-    -o-box-shadow: $1 $2 $3 $4 $5 rgba($6, $7, $8, $9);
-    -ms-box-shadow: $1 $2 $3 $4 $5 rgba($6, $7, $8, $9);
     box-shadow: $1 $2 $3 $4 $5 rgba($6, $7, $8, $9);
 snippet	box-sizing
 alias	bsz
     -moz-box-sizing: ${1:border-box};
-    -webkit-box-sizing: $1;
-    -o-box-sizing: $1;
-    -ms-box-sizing: $1;
     box-sizing: $1;
 snippet	background-size
 alias	bgsz
-    -moz-background-size: ${1} ${2};
-    -webkit-background-size: $1 $2;
-    -o-background-size: $1 $2;
-    -ms-background-size: $1 $2;
     background-size: $1 $2;
 snippet	text-shadow
 alias	tsh
