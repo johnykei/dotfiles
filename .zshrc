@@ -73,6 +73,8 @@ alias ghe="git help"
 # fi
 # autoload -U compinit; compinit -u
 
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
 # z.sh
 _Z_CMD=j
 source ~/.zsh/z/z.sh

@@ -1,21 +1,25 @@
 "" 基本設定 {{{
-set guifont=Source_Code_Pro:h16 " フォント指定
+set guifont=Ricty_Diminished:h18 " フォント指定
+set linespace=2
 set lines=90 columns=300 " ウィンドウサイズをセット はみだした部分は自動的に修正させて画面いっぱいに表示させる
 set guioptions-=T " ウィンドウ上部のタブ部分を無効に
 "set noimdisableactivate
 "set imdisable " IMEを無効に
 set showtabline=2
+set smarttab
 set expandtab
 "set tabstop=2
 "set shiftwidth=2
 set tabstop=4
 set shiftwidth=4
-set smartindent
+"set smartindent
+set autoindent
 set showmatch
 set number
 set noundofile " undo ファイルを無効化
 set noerrorbells " ビープ音を消す
 set vb t_vb=  " ビープ音を消す
+set hlsearch
 
 au BufEnter * execute ":lcd " . expand("%:p:h")
 "フルスクリーンモード
@@ -96,6 +100,11 @@ endfunction
 autocmd BufNewFile *.html 0r ~/.vim/skel/skel.html
 autocmd BufNewFile *.css 0r ~/.vim/skel/skel.css
 
+if has('mac')
+  " let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
+endif
+
 "" Plugin 設定
 " -----------------------------------------------------
 
@@ -119,16 +128,7 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
-"" for NERDCommenterToggle {{{
-" c-oでコメントアウト・コメント
-let g:NERDCreateDefaultMappings = 0
-let NERDSpaceDelims = 1
-nmap <c-o> <Plug>NERDCommenterToggle
-vmap <c-o> <Plug>NERDCommenterToggle
-nmap <c-o>m <Plug>NERDCommenterMinimal
-vmap <c-o>m <Plug>NERDCommenterMinimal
-nmap <c-o>s <Plug>NERDCommenterSexy
-vmap <c-o>s <Plug>NERDCommenterSexy
+map <c-o>s <Plug>NERDCommenterSexy
 
 "" endtagcomment.vim {{{
 let g:endtagcommentFormat = '<!-- /%id%class -->'
@@ -149,9 +149,6 @@ au! BufRead,BufNewFile *.less set filetype=less
 
 "" velocity {{{
 au BufRead,BufNewFile *.vm set ft=html syntax=velocity
-
-""" QuickBuf {{{
-let g:qb_hotkey = ";;"
 
 "" unite.vim {{{
 " The prefix key.
@@ -192,11 +189,12 @@ nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W
 nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
+"if executable('ag')
+"  let g:unite_source_grep_command = 'ag'
+"  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+"  let g:unite_source_grep_recursive_opt = ''
+"  let g:unite_source_grep_max_candidates = 200
+"endif
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
@@ -211,7 +209,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 "" vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
 " 新しいタブでファイルを開く
-let g:vimfiler_edit_action = 'tabopen'
+let g:vimfiler_edit_action = 'open'
 nnoremap <silent> [unite]e :<C-u>VimFilerBufferDir -quit<CR>
 "現在開いているバッファをIDE風に開く
 nnoremap <silent> [unite]i :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
@@ -286,112 +284,98 @@ let g:vimshell_enable_smart_case = 1
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 " neocomplcache.vim
-Bundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache'
 
 " neosnippet.vim
-Bundle 'Shougo/neosnippet'
-
-" snipmate-snippets
-" Bundle 'honza/snipmate-snippets'
+NeoBundle 'Shougo/neosnippet'
 
 " Nerdcommenter
-Bundle 'scrooloose/nerdcommenter'
-
-" Nerdtree
-" Bundle 'scrooloose/nerdtree'
-
-" QuickBuf
-Bundle 'QuickBuf'
+NeoBundle 'scrooloose/nerdcommenter'
 
 " surround.vim
-Bundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-surround'
 
 " YankRing
-Bundle 'chrismetcalf/vim-yankring'
+NeoBundle 'chrismetcalf/vim-yankring'
 
 " Zencoding
 " Bundle 'mattn/zencoding-vim'
-Bundle 'mattn/emmet-vim'
-
-" ack.vim
-Bundle 'mileszs/ack.vim'
+NeoBundle 'mattn/emmet-vim'
 
 " html5.vim
-Bundle 'othree/html5.vim'
+NeoBundle 'othree/html5.vim'
 
 " vim-less
-Bundle 'groenewege/vim-less'
+NeoBundle 'groenewege/vim-less'
 
 " vim-velocity
-Bundle 'lepture/vim-velocity'
+NeoBundle 'lepture/vim-velocity'
 
 " vim-css3-syntax
-Bundle 'hail2u/vim-css3-syntax'
+NeoBundle 'hail2u/vim-css3-syntax'
 
 " vim-browsereload-mac
-Bundle 'tell-k/vim-browsereload-mac'
-
-" Endtagcomment.vim
-Bundle 'git://gist.github.com/411828.git'
-
-" mru.vim
-" Bundle 'vim-scripts/mru.vim'
-
-" FuzzyFinder
-" Bundle 'FuzzyFinder'
-
-" Auto Close
-" Bundle 'AutoClose'
+NeoBundle 'tell-k/vim-browsereload-mac'
 
 " MatchTag
-Bundle "MatchTag"
+NeoBundle "MatchTag"
 
 " Syntastic
-Bundle 'scrooloose/syntastic'
-
-" ctrip
-"Bundle 'kien/ctrlp.vim'
-
-" vimproc
-Bundle 'Shougo/vimproc'
+NeoBundle 'scrooloose/syntastic'
 
 " vimshell
-Bundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimshell'
 
 " unite.vim
-Bundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim'
 
 " neomru
-Bundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neomru.vim'
 
-" neomru
-Bundle 'Shougo/vimfiler.vim'
+" vimfiler
+NeoBundle 'Shougo/vimfiler.vim'
 
 " memolist
-Bundle 'glidenote/memolist.vim'
-
-"Changed
-"Bundle 'Changed'
+NeoBundle 'glidenote/memolist.vim'
 
 " git-vim
-Bundle 'motemen/git-vim'
+NeoBundle 'motemen/git-vim'
 
 " Sass
 "Bundle 'tpope/vim-haml'
-Bundle 'cakebaker/scss-syntax.vim'
-
-" Sass Compile
-"Bundle 'AtsushiM/sass-compile.vim'
-
-" CSScomb
-Bundle 'csscomb/CSScomb-for-Vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
 
 " vim over
-Bundle 'osyo-manga/vim-over'
+NeoBundle 'osyo-manga/vim-over'
 
 " easy motion
-Bundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Lokaltog/vim-easymotion'
+
+" ag.vim
+NeoBundle 'rking/ag.vim'
+
+" vim-qfreplace
+NeoBundle 'thinca/vim-qfreplace'
+
+filetype plugin indent on
+
+NeoBundleCheck
